@@ -1,0 +1,30 @@
+<html lang='en'>
+<head>
+  <meta charset="utf-18">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <title>Twicth Stream viewer</title>
+</head>
+  <body>
+
+    <header>
+      <div id="searchWrapper">
+        <input id="searchBar" type="text" name="search" placeholder="Enter Twitch user ID to add to the list" />
+        <button id="searchButton">Submit</button>
+      </div>
+    </header>
+    <main id='outer'>
+      <div id='container'>
+        <div id="banner">Twitch streamers</div>
+        <nav id=navBar>
+          <button class='navBarButton' id='all'>Display all</button>
+          <button class='navBarButton' id='live'>Display Live</button>
+          <button class='navBarButton' id='offline'>Display Offline</button>
+        </nav>
+        <div id='twitchBox' class='render'>
+        </div>
+      </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
