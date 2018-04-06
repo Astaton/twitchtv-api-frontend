@@ -16,7 +16,9 @@ header{
   margin: auto;
   max-width: 810px;
 }
-
+label{
+  display: none;
+}
 #searchWrapper{
   position: relative;
   display: table;
@@ -155,45 +157,19 @@ header{
   width: auto;
   background-color: lightgrey;
   margin-top: 68%; 
-  opacity: .8;
+  opacity: .75;
   color: black;
 } 
-
-.titlePlate span{
-  
-  
-}
 
 .titlePlateText{
   vertical-align: middle;
   float: left;
-  /*max-height: 57px;*/
   margin-left: 5%;
   margin-right: 5%;
   margin-top: 1px;
   margin-bottom: 0;
   overflow: hidden
 }
- .removeBtn{
-  float: right;
-  position: relative;
-  background: red;
-  padding: 0px 2px;
-  outline-style: none;
-  /*margin-top: -5px;*/
-  margin-bottom: 0;
-  bottom: 0%;
- /* left: 88%;*/
- }
-
-/*
-#ESL_SC2{
-  background-image: url(https://static-cdn.jtvnw.net/jtv_user_pictures/esl_csgob-profile_image-15e94fd6bbac1a23-300x300.png);
-  background-size: cover;
-  background-repeat: norepeat; */
+@media screen (max-width:768px){
+  
 }
-
-/*
-#noobs2ninjas{
-  display: none;
-}*/

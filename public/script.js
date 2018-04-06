@@ -2,7 +2,6 @@
 $(document).ready(function() {
   
   var userLinkBase = "https://www.twitch.tv/";
-  var mouseOffTimer;
   var usersObj = {};
   var apiInfo = {
     users: {
@@ -34,7 +33,7 @@ $(document).ready(function() {
 
   var userIdsMasterlist = ["esl_sc2","ogamingsc2","cretetion","freecodecamp","hardlydifficult","habathcx","robotcaleb","noobs2ninjas","esl_csgob","streamerhouse"];
 
-  var userIdsDisplaylist = ["esl_sc2","ogamingsc2","cretetion","freecodecamp","hardlydifficult","habathcx","robotcaleb","noobs2ninjas","esl_csgob","streamerhouse"];
+  var userIdsDisplaylist = [...userIdsMasterlist];
 
 
   function userInfoObj(userName, idNo, profileImage, url, live = "Offline"){
@@ -56,87 +55,88 @@ $(document).ready(function() {
     };
 
     function visitUser(user){
-      console.log("visit");
       window.open(usersObj[user].url);
     }
 
 
 
-      function mouseOn(target, thumbImage, user){
-        //clear mouseoffTimer so that it does not rerender the DOM
-        // console.log("in mouseOn");
-        // clearInterval(mouseOffTimer);
-        //check for not offline instead of live because sometimes people stream videos but are not 'live'
-        if(usersObj[user].live !== "Offline"){
-          $(target).replaceWith(
-            "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='SVG/Play button.svg' alt='Play button' title='Watch: "+usersObj[user].userName+" play "+usersObj[user].gameName+" live!'/><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='SVG/Remove button.svg' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><span><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>Playing: "+usersObj[user].gameName.slice(0, 13)+"...<br> Viewers: "+usersObj[user].viewers+"</p></span></div></div>"
-            );
-          $("#"+usersObj[user].userName).css('background-image', "url("+thumbImage+")");
-        }else{
-          $(target).replaceWith(
-            "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='SVG/Play button.svg' alt='play button' title='Click to visit!' /><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='SVG/Remove button.svg' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><span><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"</p></span></div></div>"
-            );
-          $("#"+usersObj[user].userName).css("background-image", "url("+usersObj[user].profileImage+")");
-        }
-        //set mouse off event listner
-        $(target).mouseout(function(){mouseOff()}); 
-        //set eventlisteners for play and remove buttons
-        $("#"+usersObj[user].userName+"playButton").click(function(){visitUser(user)});
-        $("#"+usersObj[user].userName+"removeButton").click(function(){removeUser(user)});
-        //add class to fade in buttons
-        $("#"+usersObj[user].userName+"playButton").addClass('buttonFade');
-        $("#"+usersObj[user].userName+"removeButton").addClass('buttonFade');
-      }
+  function mouseOn(target, thumbImage, user){
+    //check for not offline instead of live because sometimes people stream videos but are not 'live'
+    if(usersObj[user].live !== "Offline"){
+      $(target).replaceWith(
+        "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='SVG/Play button.svg' alt='Play button' title='Watch: "+usersObj[user].userName+" play "+usersObj[user].gameName+" live!'/><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='SVG/Remove button.svg' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>Playing: "+usersObj[user].gameName.slice(0, 13)+"...<br> Viewers: "+usersObj[user].viewers+"</p></div></div>"
+        );
+      $("#"+usersObj[user].userName).css('background-image', "url("+thumbImage+")");
+    }else{
+      $(target).replaceWith(
+        "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='SVG/Play button.svg' alt='play button' title='Click to visit!' /><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='SVG/Remove button.svg' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"</p></div></div>"
+        );
+      $("#"+usersObj[user].userName).css("background-image", "url("+usersObj[user].profileImage+")");
+    }
+    //set eventlisteners for play and remove buttons
+    $("#"+usersObj[user].userName+"playButton").click(function(){visitUser(user)});
+    $("#"+usersObj[user].userName+"removeButton").click(function(){removeUser(user)});
+    //add class to fade in buttons NOT WORKING
+    $("#"+usersObj[user].userName+"playButton").addClass('buttonFade');
+    $("#"+usersObj[user].userName+"removeButton").addClass('buttonFade');
 
-      function mouseOff(){
-        // console.log("in mouseOff");
-        // var counter = 0;
-        // mouseOffTimer = setInterval(function(){
-        //   if(counter >= 25){
-        //     console.log("mouseOff Timeout "+counter);
-        //     clearInterval(mouseOffTimer);
-        //     renderChannels(userIdsDisplaylist);
-        //   }
-        //   counter++;
-        // },1);
-        renderChannels(userIdsDisplaylist)
-      }
-  
-      //takes in an array of usernames and renders the associated user objects to screen
+    $("#"+usersObj[user].userName).mouseleave(function(){mouseOff("#"+usersObj[user].userName, user)});
+  }
+
+
+  function mouseOff(target, user){
+     renderChannels([user])
+   }
+   
+ 
+  //takes in an array of usernames and renders the associated user objects to screen
   function renderChannels(usersToRender){
     usersToRender.forEach(function(user){
-      //if it is a new element being added append the twitch box
-      if($("#"+usersObj[user].userName).length === 0){
-        $("#twitchBox").append(
-          "<div class='userBox' id='"+usersObj[user].userName+"'><div class='titlePlate'><span><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"</p></span></div></div>"
-        );
-      }
-      else{//if the element exits udpate the info in it
         //if live update the live stream information
-        if( usersObj[user].live == "live"){
+        if( usersObj[user].live !== "Offline"){
           $("#"+usersObj[user].userName).replaceWith(
-            "<div class='userBox' id='"+usersObj[user].userName+"' title='usersObj[user].title'><div class='titlePlate'><span><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"<br>"+usersObj[user].title.slice(0, 13)+"...</p></span></div></div>"
+            "<div class='userBox' id='"+usersObj[user].userName+"' title='usersObj[user].title'><div class='titlePlate'><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"<br>"+usersObj[user].title.slice(0, 13)+"...</p></div></div>"
           ); 
         }
         else{
           //if not live update the standard information
           $("#"+usersObj[user].userName).replaceWith(
-            "<div class='userBox' id='"+usersObj[user].userName+"' title='Click to visit!'><div class='titlePlate'><span><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"</p></span></div></div>"
-          );
+            "<div class='userBox' id='"+usersObj[user].userName+"' title='Click to visit!'><div class='titlePlate'><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"</p></div></div>"
+          );    
         }
-      }
       
       //set background after rendering elements or they may be lost
       $("#"+usersObj[user].userName).css("background-image", "url("+usersObj[user].profileImage+")");
       //set mouse on / mouse off for all twitch channels
-      $("#"+usersObj[user].userName).hover(function(){mouseOn("#"+usersObj[user].userName, usersObj[user].thumbnail, user)}, function(){mouseOff()});
+      $("#"+usersObj[user].userName).mouseenter(function(){mouseOn("#"+usersObj[user].userName, usersObj[user].thumbnail, user)});
+      $("#"+usersObj[user].userName).mouseleave(function(){mouseOff("#"+usersObj[user].userName, user)});
+    });
+  }
+
+  //takes in an array of usernames and adds the associated user objects to the twitchBox
+  function addChannels(usersToAdd){
+    usersToAdd.forEach(function(user){
+      if( usersObj[user].live !== "Offline"){
+        $("#twitchBox").append(
+              "<div class='userBox' id='"+usersObj[user].userName+"' title='usersObj[user].title'><div class='titlePlate'><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"<br>"+usersObj[user].title.slice(0, 13)+"...</p></div></div>"
+            );           
+      }else{
+        $("#twitchBox").append(
+            "<div class='userBox' id='"+usersObj[user].userName+"'><div class='titlePlate'><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"</p></div></div>"
+          );
+          //set background after rendering elements or they may be lost
+      }
+      //set background after rendering elements or they may be lost
+      $("#"+usersObj[user].userName).css("background-image", "url("+usersObj[user].profileImage+")");
+      //set mouse on for all added twitch channels
+      $("#"+usersObj[user].userName).mouseover(function(){mouseOn("#"+usersObj[user].userName, usersObj[user].thumbnail, user)});
     });
   }
 
   function diplayAll(){
     $("#twitchBox").empty();
     userIdsDisplaylist = [...userIdsMasterlist];
-    renderChannels(userIdsDisplaylist);
+    addChannels(userIdsDisplaylist);
   }
 
   
@@ -148,7 +148,7 @@ $(document).ready(function() {
       }
     }
     $("#twitchBox").empty();
-    renderChannels(userIdsDisplaylist);
+    addChannels(userIdsDisplaylist);
   }
   
   function displayOffline(){
@@ -159,7 +159,7 @@ $(document).ready(function() {
       }
     }
     $("#twitchBox").empty();
-    renderChannels(userIdsDisplaylist);
+    addChannels(userIdsDisplaylist);
   }
   
   function gameInfo(idNo, user){
@@ -208,7 +208,7 @@ $(document).ready(function() {
             }
           });
           // resolve(userIds);
-          renderChannels(getUsersData);
+          addChannels(getUsersData);
         },
         error: function(status){
           alert("Error occured while making streamInfo API call. "+status.responseJSON.message);
@@ -218,6 +218,7 @@ $(document).ready(function() {
       });
     // }
   }
+
   //gathers user info from the twitch api for userIds passed in an array
   function userInfo(getUsersData){
     // return new Promise function(resolve, reject){
@@ -254,7 +255,7 @@ $(document).ready(function() {
     // }  
   }
   //calls userInfo on load and begins process of gathering user info for display 
-  userInfo(userIdsMasterlist);
+  userInfo(userIdsDisplaylist);
 
   function toggleDisplayButtons(button){
     var displayButtons = ['#all', '#live', '#offline'];
@@ -305,7 +306,7 @@ $(document).ready(function() {
       }
     }
     delete usersObj[user];
-    $("#twitchBox").empty();
+    //$("#twitchBox").empty();
     if($('#all').hasClass('navBarButtonPressed')){
       diplayAll();
     } else if($('#live').hasClass('navBarButtonPressed')){
