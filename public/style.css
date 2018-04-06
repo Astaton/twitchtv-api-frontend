@@ -45,14 +45,10 @@ label{
   text-align: center;
   font-size: 25px;
   font-weight: 900;
-  max-width: 910px;
 }
 
 #navBar{
   height: 57px;
-  max-width: 930px;
-  min-width: 487px;
- /* min-width: 950;*/
   background: -moz-linear-gradient(#4d4d4d 0%, #000000 100%);
   background: -webkit-linear-gradient(#4d4d4d 0%, #000000 100%);
   background: -o-linear-gradient(#4d4d4d 0%, #000000 100%);
@@ -66,7 +62,7 @@ label{
 
 .navBarButton{
   height: 57px;
-  width: 33.005%;
+  width: 33%;
   background: #8c9cbf;
   background: -moz-linear-gradient(top, #86878a 0%, #40444d  50%, #292b30 75%);
   background: -webkit-linear-gradient(top, #86878a 0%, #40444d  50%, #292b30 75%);
@@ -100,10 +96,8 @@ label{
 }
 
 #twitchBox{
- /* height: auto;*/
   max-width: 930px;
-  /*min-width: 960px;*/
-  margin-top: auto;
+ /* margin-top: auto;*/
   margin-left: auto;
   margin-right: auto;
   color: black;
@@ -111,7 +105,6 @@ label{
 }
 
 .userBox{
-  /*height: 16%;*/
   width: 16%;
   min-width: 160px;
   margin: 0;
@@ -119,7 +112,6 @@ label{
   float: left;
   background-size: 100%;
   background-repeat: no-repeat;
-  /*display: inline-block;*/
   border: solid black 1px;
 }
 
@@ -170,6 +162,35 @@ label{
   margin-bottom: 0;
   overflow: hidden
 }
-@media screen (max-width:768px){
+
+@media screen and (max-width:768px){
+  #banner{
+
+  }
+  .navBarButton{
+    width: 213px;
+  }
+  #container{
+    max-width: 648px;
+  }
+  
+}
+
+@media screen and (max-width:425px){
+  header{
+    width: 500px;
+  }
+
+  #navBar{
+    height: 175px;
+  }
+
+  .navBarButton{
+    width: 430px;
+  }
+
+  #container{
+   /* max-width: 648px;*/
+  }
   
 }
