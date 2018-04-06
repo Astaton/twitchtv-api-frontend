@@ -69,12 +69,12 @@ $(document).ready(function() {
         //check for not offline instead of live because sometimes people stream videos but are not 'live'
         if(usersObj[user].live !== "Offline"){
           $(target).replaceWith(
-            "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='svg/play button.svg' alt='play button' title='Watch: "+usersObj[user].userName+" play "+usersObj[user].gameName+" live!'/><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='svg/remove button.svg' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><span><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>Playing: "+usersObj[user].gameName.slice(0, 13)+"...<br> Viewers: "+usersObj[user].viewers+"</p></span></div></div>"
+            "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='/svg/play button.svg' alt='play button' title='Watch: "+usersObj[user].userName+" play "+usersObj[user].gameName+" live!'/><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='/svg/remove button.svg' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><span><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>Playing: "+usersObj[user].gameName.slice(0, 13)+"...<br> Viewers: "+usersObj[user].viewers+"</p></span></div></div>"
             );
           $("#"+usersObj[user].userName).css('background-image', "url("+thumbImage+")");
         }else{
           $(target).replaceWith(
-            "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='svg/play button.svg' alt='play button' title='Click to visit!' /><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='svg/remove button.svg' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><span><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"</p></span></div></div>"
+            "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='/svg/play button.svg' alt='play button' title='Click to visit!' /><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='/svg/remove button.svg' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><span><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+usersObj[user].userName+" - "+usersObj[user].live+"</p></span></div></div>"
             );
           $("#"+usersObj[user].userName).css("background-image", "url("+usersObj[user].profileImage+")");
         }
