@@ -231,7 +231,8 @@ $(document).ready(function() {
         success: function(twitchUsers){
           //if less than one user was not found return error
           if(twitchUsers.data.length < 1){
-            return alert("User "+getUsersData[0]+" was not found, please try again.");
+            messageBox("Error", "User "+getUsersData[0]+" was not found.", "Please check the spelling and try again.");
+            return
           }
           //if one single player added by user was found and user id to master list
           if(twitchUsers.data.length === 1){
@@ -247,7 +248,7 @@ $(document).ready(function() {
           streamInfo(getUsersData)
         },
         error: function(status){
-          alert("Error occured while making userinfo API call. "+status.responseJSON.message);
+          messageBox("Error", "An error occured while trying to get information from twitch.tv", status.responseJSON.message)
           console.error("Error occured while making userinfo API call ",status.responseJSON.message);
           // reject("Error occured while making userinfo API call ",status.responseJSON.message);
         }
@@ -256,6 +257,31 @@ $(document).ready(function() {
   }
   //calls userInfo on load and begins process of gathering user info for display 
   userInfo(userIdsDisplaylist);
+
+  function messageBox(header, line1, line2){
+    $("#messageHeaderText").replaceWith(
+        "<h2 id='messageHeaderText'>"+header+"</h2>"
+      );
+    $("#messageLine1").replaceWith(
+      "<p id='messageLine1'>"+line1+"</p>"
+    );
+    if(line2){
+      $("#messageLine2").replaceWith(
+        "<p id='messageLine2'>"+line2+"</p>"
+      );
+    }else{
+      $("#messageLine2").replaceWith(
+        "<p id='messageLine2'></p>"
+      );
+    }
+    $("#messageContainer").css("display", "block");
+  }
+
+  function closeMessageBox(){
+    $("#messageContainer").css("display", "none");
+  }
+
+  $("#messageCloseButton").on('click', function(){closeMessageBox()})
 
   function toggleDisplayButtons(button){
     var displayButtons = ['#all', '#live', '#offline'];
@@ -290,14 +316,19 @@ $(document).ready(function() {
 
   function addUser(){
     var userToAdd = [$("#searchBar").val().toLowerCase()];
-    if(userToAdd[0]){
+    if(userToAdd[0].length > 1 && !usersObj[userToAdd]){
+      console.log("calling for "+userToAdd[0].length);
       userInfo(userToAdd);
+    }else{
+      messageBox("Alert", userToAdd+" is already in your list of streamers");
+      console.log(userToAdd+" is already in your list of streamers");
     }
     $("#searchBar").val("");
   }
 
   function removeUser(user){
     console.log("user");
+    //messageBox("Warning", "Are you sure you want to remove "+user+" from your list?");
     var index;
     for(i = 0; i < userIdsMasterlist.length; i++){
       if(userIdsMasterlist[i] === user){
