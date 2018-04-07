@@ -75,7 +75,7 @@ $(document).ready(function() {
     }
     //set eventlisteners for play and remove buttons
     $("#"+usersObj[user].userName+"playButton").click(function(){visitUser(user)});
-    $("#"+usersObj[user].userName+"removeButton").click(function(){removeUser(user)});
+    $("#"+usersObj[user].userName+"removeButton").click(function(){removeUserRequest(user)});
     //add class to fade in buttons NOT WORKING
     $("#"+usersObj[user].userName+"playButton").addClass('buttonFade');
     $("#"+usersObj[user].userName+"removeButton").addClass('buttonFade');
@@ -258,7 +258,7 @@ $(document).ready(function() {
   //calls userInfo on load and begins process of gathering user info for display 
   userInfo(userIdsDisplaylist);
 
-  function messageBox(header, line1, line2){
+  function messageBox(header, line1, line2, user){
     $("#messageHeaderText").replaceWith(
         "<h2 id='messageHeaderText'>"+header+"</h2>"
       );
@@ -274,14 +274,22 @@ $(document).ready(function() {
         "<p id='messageLine2'></p>"
       );
     }
+    if(user){
+     $("#messageConfirm").css("display", "block");
+     $("#messageConfirmButton").on('click', function(){removeUser(user); closeMessageBox()});
+    }else{
+      $("#messageConfirm").css("display", "none");
+    }
     $("#messageContainer").css("display", "block");
   }
 
   function closeMessageBox(){
     $("#messageContainer").css("display", "none");
+    $("#messageConfirm").css("display", "none");
   }
 
   $("#messageCloseButton").on('click', function(){closeMessageBox()})
+  $("#messageCancelButton").on('click', function(){closeMessageBox()});
 
   function toggleDisplayButtons(button){
     var displayButtons = ['#all', '#live', '#offline'];
@@ -316,20 +324,22 @@ $(document).ready(function() {
 
   function addUser(){
     var userToAdd = [$("#searchBar").val().toLowerCase()];
-    if(userToAdd[0].length > 1 && !usersObj[userToAdd]){
-      console.log("calling for "+userToAdd[0].length);
+    if(userToAdd[0].length < 1){
+      return
+    }else if(userToAdd[0].length > 0 && !usersObj[userToAdd]){
       userInfo(userToAdd);
     }else{
       messageBox("Alert", userToAdd+" is already in your list of streamers");
-      console.log(userToAdd+" is already in your list of streamers");
     }
     $("#searchBar").val("");
   }
 
-  function removeUser(user){
+  function removeUserRequest(user){
     console.log("user");
-    //messageBox("Warning", "Are you sure you want to remove "+user+" from your list?");
-    var index;
+    messageBox("Warning", "Are you sure you want to remove "+usersObj[user].userName+" from your list?", null, user)
+  }
+
+  function removeUser(user){
     for(i = 0; i < userIdsMasterlist.length; i++){
       if(userIdsMasterlist[i] === user){
         userIdsMasterlist.splice(i,1);
@@ -348,8 +358,8 @@ $(document).ready(function() {
   }
 
   $("input").on('keydown', function(e){
-    if(e.keyCode === 13){
-      addUser();
+    if(e.keyCode === 13){      
+      addUser();      
     }
   });
 

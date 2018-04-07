@@ -65,6 +65,23 @@ html, body{
     cursor: pointer;
 }
 
+.messageButtons{
+  margin-bottom: 17px;
+  padding: 8px 6px;
+  background: #834fd3;
+  background: -moz-linear-gradient(top, #6120c3, #947bb8 50%, #947bb8, #6120c3);
+  background: -o-linear-gradient(top, #6120c3, #947bb8 50%, #947bb8, #6120c3);
+  background: -webkit-linear-gradient(top, #6120c3, #947bb8 50%, #947bb8, #6120c3);
+  background: linear-gradient(top, #6120c3, #947bb8 50%, #947bb8, #6120c3);
+  outline: none;
+}
+#messageConfirmButton{
+  margin-right: 7px;
+}
+#messageCancelButton{
+  margin-left: 7px;
+}
+
 #messageHeader {
     padding: 2px 16px;
     background-color: #6120c3;
@@ -78,6 +95,13 @@ header{
   position: relative;
   margin: auto;
   max-width: 810px;
+  padding-top: 0px;
+}
+
+#headerText{
+  text-align: center;
+  margin: 5px 0px;
+  padding-top: 5px;
 }
 
 label{
@@ -88,7 +112,7 @@ label{
   position: relative;
   display: table;
   margin: auto;
-  padding: 5px 0;
+  padding: 0px 0 5px;
 }
 
 #searchBar{
@@ -272,6 +296,10 @@ label{
   #twitchBox{
     width: 486px;
   }
+  #searchButton{
+    padding: 6px 8px;
+    width: 100%;
+  }  
 }
 
 @media screen and (max-width:490px){
