@@ -74,9 +74,10 @@ $(document).ready(function() {
 
   function mouseOn(target, thumbImage, user){
     //check for not offline instead of live because sometimes people stream videos but are not 'live'
+    let gameName = usersObj[user].gameName.length > 16? usersObj[user].gameName.slice(0, 16)+'...' : usersObj[user].gameName;
     if(usersObj[user].live !== "Offline"){
       $(target).replaceWith(
-        "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='"+playButton+"' alt='Play button' title='Watch: "+usersObj[user].userName+" play "+usersObj[user].gameName+" live!'/><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='"+removeButton+"' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>Playing: "+usersObj[user].gameName.slice(0, 13)+"...<br> Viewers: "+usersObj[user].viewers+"</p></div></div>"
+        "<div class='userBox' id='"+usersObj[user].userName+"'><img id='"+usersObj[user].userName+"playButton' class='playButton' src='"+playButton+"' alt='Play button' title='Watch: "+usersObj[user].userName+" play "+usersObj[user].gameName+" live!'/><img id='"+usersObj[user].userName+"removeButton' class='removeButton' src='"+removeButton+"' alt='remove button' title='Click to remove this user from your list'/><div class='titlePlate'><p class='titlePlateText' id='titlePlateText"+usersObj[user].userName+"'>"+gameName+"<br> Viewers: "+usersObj[user].viewers+"</p></div></div>"
         );
       $("#"+usersObj[user].userName).css('background-image', "url("+thumbImage+")");
     }else{
