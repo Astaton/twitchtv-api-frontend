@@ -89,9 +89,6 @@ $(document).ready(function() {
     //set eventlisteners for play and remove buttons
     $("#"+usersObj[user].userName+"playButton").click(function(){visitUser(user)});
     $("#"+usersObj[user].userName+"removeButton").click(function(){removeUserRequest(user)});
-    //add class to fade in buttons NOT WORKING
-    $("#"+usersObj[user].userName+"playButton").addClass('buttonFade');
-    $("#"+usersObj[user].userName+"removeButton").addClass('buttonFade');
 
     $("#"+usersObj[user].userName).mouseleave(function(){mouseOff("#"+usersObj[user].userName, user)});
   }

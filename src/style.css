@@ -208,24 +208,18 @@ label{
   float: left;
   position: relative;
   width: 42px;
-  top: 35;
-  left: 19;
-  opacity: 0;
+  top: 35px;
+  left: 19px;
 }
 
 .removeButton{
   float: right;
   position: relative;
   width: 42px;
-  top: 35;
-  right: 19;
-  opacity: 0;
-  transition: opacity 2s ease;
+  top: 35px;
+  right: 19px;
 }
 
-.buttonFade{
-  opacity: 1
-}
 
 .userBox:hover{
   box-shadow: 1px 1px 2px white, 1px -1px 2px white, -1px 1px 2px white, -1px -1px 2px white;
