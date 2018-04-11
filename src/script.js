@@ -269,6 +269,7 @@ $(document).ready(function() {
   userInfo(userIdsDisplaylist);
 
   function messageBox(header, line1, line2, user){
+    console.log("messageBox user: "+ user);
     $("#messageHeaderText").replaceWith(
         "<h2 id='messageHeaderText'>"+header+"</h2>"
       );
@@ -291,6 +292,7 @@ $(document).ready(function() {
       $("#messageConfirm").css("display", "none");
     }
     $("#messageContainer").css("display", "block");
+    return
   }
 
   function closeMessageBox(){
@@ -298,8 +300,13 @@ $(document).ready(function() {
     $("#messageConfirm").css("display", "none");
   }
 
+function cancelMessageBoxAction(){
+  $("#messageConfirmButton").off();
+  closeMessageBox();
+}
+
   $("#messageCloseButton").on('click', function(){closeMessageBox()})
-  $("#messageCancelButton").on('click', function(){closeMessageBox()});
+  $("#messageCancelButton").on('click', function(){cancelMessageBoxAction()});
 
   function toggleDisplayButtons(button){
     var displayButtons = ['#all', '#live', '#offline'];
@@ -345,11 +352,13 @@ $(document).ready(function() {
   }
 
   function removeUserRequest(user){
-    console.log("user");
-    messageBox("Warning", "Are you sure you want to remove "+usersObj[user].userName+" from your list?", null, user)
+    console.log("removeUserRequest user: "+ user);
+    messageBox("Warning", "Are you sure you want to remove "+usersObj[user].userName+" from your list?", null, user);
+    return
   }
 
   function removeUser(user){
+    console.log("removeUser user: "+ user);
     for(let i = 0; i < userIdsMasterlist.length; i++){
       if(userIdsMasterlist[i] === user){
         userIdsMasterlist.splice(i,1);
