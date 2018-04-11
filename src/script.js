@@ -268,6 +268,8 @@ $(document).ready(function() {
   //calls userInfo on load and begins process of gathering user info for display 
   userInfo(userIdsDisplaylist);
 
+
+  //controls message box functionality
   function messageBox(header, line1, line2, user){
     console.log("messageBox user: "+ user);
     $("#messageHeaderText").replaceWith(
