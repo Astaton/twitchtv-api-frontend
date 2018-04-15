@@ -7,7 +7,7 @@ module.exports = {
 		script: './src/script.js'
 	},
 	output: {
-		path: path.resolve(__dirname, './'),
+		path: path.resolve(__dirname, 'public'),
 		filename: '[name].bundle.js'
 	},
 	module: {
