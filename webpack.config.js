@@ -7,7 +7,7 @@ module.exports = {
 		script: './src/script.js'
 	},
 	output: {
-		path: path.resolve(__dirname, '/'),
+		path: path.resolve(__dirname, './'),
 		filename: '[name].bundle.js'
 	},
 	module: {
@@ -35,8 +35,8 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
-		inline: true,
-		stats: 'errors-only'
+		inline: true
+		// stats: 'errors-only'
 	},
 	plugins: [
 		new webpack.ProvidePlugin({

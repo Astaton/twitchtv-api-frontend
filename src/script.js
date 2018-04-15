@@ -265,8 +265,10 @@ $(document).ready(function() {
       });
     // }  
   }
-  //calls userInfo on load and begins process of gathering user info for display 
-  userInfo(userIdsDisplaylist);
+  //calls userInfo on load and begins process of gathering user info for display
+  setTimeout(function(){
+      userInfo(userIdsDisplaylist);
+  },1250); 
 
 
   //controls message box functionality
