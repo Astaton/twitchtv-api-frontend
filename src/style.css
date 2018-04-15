@@ -2,11 +2,12 @@ html, body{
   background: #823dea;
   background: -moz-linear-gradient(#944dff, #3d0099);
   background: -webkit-linear-gradient(#944dff, #3d0099);
-  background: -o-linear-gradient(#944dff, #3d0099);
+  background: -webkit-gradient(linear, left top, left bottom, from(#944dff), to(#3d0099));
   background: linear-gradient(#944dff, #3d0099);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-size: cover;
+  -moz-background-size: cover;
+       background-size: cover;
   margin: 0;
   padding: 0;
   height: 100% !important;
@@ -34,15 +35,24 @@ html, body{
     padding: 0;
     border: 1px solid #888;
     width: 810px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+       -moz-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+    -moz-animation-name: animatetop;
+         animation-name: animatetop;
+    -moz-animation-duration: 0.4s;
+         animation-duration: 0.4s
 }
 
 @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@-moz-keyframes animatetop {
+    from {top:-300px; opacity:0}
     to {top:0; opacity:1}
 }
 
@@ -70,8 +80,8 @@ html, body{
   padding: 8px 6px;
   background: #834fd3;
   background: -moz-linear-gradient(#6120c3, #947bb8 50%, #947bb8, #6120c3);
-  background: -o-linear-gradient(#6120c3, #947bb8 50%, #947bb8, #6120c3);
   background: -webkit-linear-gradient(#6120c3, #947bb8 50%, #947bb8, #6120c3);
+  background: -webkit-gradient(linear, left top, left bottom, from(#6120c3), color-stop(50%, #947bb8), color-stop(#947bb8), to(#6120c3));
   background: linear-gradient(#6120c3, #947bb8 50%, #947bb8, #6120c3);
   outline: none;
 }
@@ -140,7 +150,7 @@ label{
   height: 57px;
   background: -moz-linear-gradient(#4d4d4d 0%, #000000 100%);
   background: -webkit-linear-gradient(#4d4d4d 0%, #000000 100%);
-  background: -o-linear-gradient(#4d4d4d 0%, #000000 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#4d4d4d), to(#000000));
   background: linear-gradient(#4d4d4d 0%, #000000 100%);
   margin-left: auto;
   margin-right: auto;
@@ -155,7 +165,7 @@ label{
   background: #8c9cbf;
   background: -moz-linear-gradient(#86878a 0%, #40444d  50%, #292b30 75%);
   background: -webkit-linear-gradient(#86878a 0%, #40444d  50%, #292b30 75%);
-  background: -o-linear-gradient(#86878a 0%, #40444d  50%, #292b30 75%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#86878a), color-stop(50%, #40444d), color-stop(75%, #292b30));
   background: linear-gradient(#86878a 0%, #40444d  50%, #292b30 75%);
   font-family: Verdana;
   font-size: 20px;
@@ -166,21 +176,23 @@ label{
 }
 
 .navBarButton:hover{
-  box-shadow: 3px 1px 5px white;
+  -webkit-box-shadow: 3px 1px 5px white;
+     -moz-box-shadow: 3px 1px 5px white;
+          box-shadow: 3px 1px 5px white;
   color: white;
 }
 
 .navBarButton:active{
   background: -moz-linear-gradient(#333134, #827e88 50%, #59565d 75%);
-  background: -o-linear-gradient(#333134, #827e88 50%, #59565d 75%);
   background: -webkit-linear-gradient(#333134, #827e88 50%, #59565d 75%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#333134), color-stop(50%, #827e88), color-stop(75%, #59565d));
   background: linear-gradient(#333134, #827e88 50%, #59565d 75%);
 }
 
 .navBarButtonPressed{
   background: -moz-linear-gradient(#817f84, #302f32  50%, #242326 75%);
-  background: -o-linear-gradient(#817f84, #302f32  50%, #242326 75%);
   background: -webkit-linear-gradient(#817f84, #302f32  50%, #242326 75%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#817f84), color-stop(50%, #302f32), color-stop(75%, #242326));
   background: linear-gradient(#817f84, #302f32  50%, #242326 75%);
 }
 
@@ -199,7 +211,8 @@ label{
   margin: 0;
   padding: 0;
   float: left;
-  background-size: 100%;
+  -moz-background-size: 100%;
+       background-size: 100%;
   background-repeat: no-repeat;
   border: solid black 1px;
 }
@@ -222,7 +235,9 @@ label{
 
 
 .userBox:hover{
-  box-shadow: 1px 1px 2px white, 1px -1px 2px white, -1px 1px 2px white, -1px -1px 2px white;
+  -webkit-box-shadow: 1px 1px 2px white, 1px -1px 2px white, -1px 1px 2px white, -1px -1px 2px white;
+     -moz-box-shadow: 1px 1px 2px white, 1px -1px 2px white, -1px 1px 2px white, -1px -1px 2px white;
+          box-shadow: 1px 1px 2px white, 1px -1px 2px white, -1px 1px 2px white, -1px -1px 2px white;
 }
 
 .titlePlate{
